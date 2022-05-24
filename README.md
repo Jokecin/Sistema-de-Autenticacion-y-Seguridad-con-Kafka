@@ -18,10 +18,10 @@ $ docker-compose up ps
 
 Luego para poder realizar una interacción con el sistema hay que irse a las direcciones web:
 
-### Ver usuarios bloqueados
+#### Ver usuarios bloqueados
 localhost:5000/blocked
 
-### Login
+#### Login
 localhost:3000/login
 
 ### ¿Por que kafka funciona bien en este escenario?
