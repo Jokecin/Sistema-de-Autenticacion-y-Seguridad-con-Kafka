@@ -6,7 +6,7 @@ Para este contexto se tienen 3 distintos servicios asociados, se tiene dos API R
 Para poder levantar el sistema de una forma distribuida se hará uso de contenedores por medio de docker, especificamente un docker-compose que contiene los 3 servicios y levantará un contenedor independiente para cada uno de ellos.
 Teniendo este archivo en el repositorio la forma de levantar el sistema es con el comando de docker:
 
-$ cd tarea2/
+$ cd '.\Tarea 2\'
 
 $ docker-compose up 
 
