@@ -18,11 +18,12 @@ $ docker-compose up ps
 
 Luego para poder realizar una interacción con el sistema hay que irse a las direcciones web:
 
-#### Ver usuarios bloqueados
+### Ver usuarios bloqueados
 localhost:5000/blocked
 
-#### Login
+### Login
 localhost:3000/login
 
 ### ¿Por que kafka funciona bien en este escenario?
-### ¿ Que haría usted para manejar una gran cantidad de usuarios al mismo tiempo?
+### ¿Que haría usted para manejar una gran cantidad de usuarios al mismo tiempo?
+Se puede afrontar este problema de distintas formas. La primera y la más natural es aumentar el número de brokers, de manera que estos puedan repartirse la carga entrante y distribuirla. Otra forma sería crear particiones pares de forma de crear redundancia y además acelerar el acceso a los datos creando dos puntos de procesamiento.
