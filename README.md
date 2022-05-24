@@ -25,5 +25,8 @@ localhost:5000/blocked
 localhost:3000/login
 
 ### ¿Por que kafka funciona bien en este escenario?
+
+Funciona bien dado que el software está optimizado para obtener mejores resultados en un contexto de procesamiento en tiempo real además de funcionar mejor para sistemas de tipo distribuido como es en este caso, además se tiene que en comparación con el flujo de datos que se utiliza en empresas de alto nivel, en este la cantidad de usuarios es insignificante por lo cual la velocidad de procesamiento es mucho mayor al tener una latencia despreciable.
+
 ### ¿Que haría usted para manejar una gran cantidad de usuarios al mismo tiempo?
 Se puede afrontar este problema de distintas formas. La primera y la más natural es aumentar el número de brokers, de manera que estos puedan repartirse la carga entrante y distribuirla. Otra forma sería crear particiones pares de forma de crear redundancia y además acelerar el acceso a los datos creando dos puntos de procesamiento. Una tercera forma es crear una especie de escalamiento horizontal y vertical, aumentando el número de brokers y a su vez estos distribuyendolos en distintos hardwares, creando una red interconectada que se auto distribuye.
