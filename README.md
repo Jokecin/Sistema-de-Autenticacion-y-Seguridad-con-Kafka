@@ -1,34 +1,69 @@
-# Tarea 2 Sistemas Distribuidos
 
-## Instrcciones de ejecución
+# Sistema de Autenticación y Seguridad con Kafka para Sistemas Distribuidos
+*Tarea 2 - Sistemas Distribuidos*
+## Descripción del Proyecto
 
-Para este contexto se tienen 3 distintos servicios asociados, se tiene dos API REST, una es la  encargada de procesar un método de "login" para el sistema, por otra parte se tiene una asociada a la seguridad en donde si se tiene que un usuario intenta acceder en número de 5 veces en menos de 1 minuto este será bloqueado dentro del sistema, finalmente se tiene un nodo de Kafka para poder intercomunicar estos dos servicios mencionados anteriormente por medio de un "topic".
-Para poder levantar el sistema de una forma distribuida se hará uso de contenedores por medio de docker, especificamente un docker-compose que contiene los 3 servicios y levantará un contenedor independiente para cada uno de ellos.
-Teniendo este archivo en el repositorio la forma de levantar el sistema es con el comando de docker:
+Este proyecto implementa un sistema distribuido de autenticación y seguridad utilizando Kafka para manejar comunicaciones entre servicios en tiempo real. Diseñado para asegurar que los intentos de acceso se gestionen eficientemente, el sistema utiliza dos APIs REST y un nodo de Kafka para intercomunicar operaciones de login y medidas de seguridad.
 
-$ cd '.\Tarea 2\'
+## Componentes del Sistema
 
-$ docker-compose up 
+- **API de Login**: Servicio REST encargado de gestionar las solicitudes de acceso de los usuarios.
+- **API de Seguridad**: Monitorea los intentos de acceso y bloquea usuarios que exceden los límites permitidos para prevenir ataques de fuerza bruta.
+- **Kafka**: Utilizado como bus de mensajes para intercomunicar los servicios de login y seguridad, optimizando la gestión de mensajes y la escalabilidad del sistema.
 
-De forma análoga para levantar el sistema en segundo plano o en modo detauch 
+## Tecnologías Utilizadas
 
-$ docker-compose up -d
+- **Kafka**: Optimiza el procesamiento de mensajes en tiempo real y es adecuado para sistemas distribuidos debido a su arquitectura de brokers y suscriptores.
+- **Docker y Docker Compose**: Facilitan el despliegue y la gestión de los servicios en contenedores independientes, asegurando un entorno consistente y escalable.
 
-Una vez levantado el sistema para poder observar el comportamiento correcto se usa el comando:
+## Inicialización del Proyecto
 
-$ docker-compose up ps
+Clonar el repositorio y navegar a la carpeta del proyecto:
 
-Luego para poder realizar una interacción con el sistema hay que irse a las direcciones web:
+```bash
+git clone https://github.com/link-to-repository
+cd Tarea2SD-main/Tarea 2
+```
 
-### Ver usuarios bloqueados
-localhost:5000/blocked
+Levantar los servicios con Docker Compose:
 
-### Login
-localhost:3000/login
+```bash
+docker-compose up # Para ejecución en primer plano
+docker-compose up -d # Para ejecución en modo detenido
+```
 
-### ¿Por que kafka funciona bien en este escenario?
+Verificar el estado de los servicios:
 
-Funciona bien dado que el software está optimizado para obtener mejores resultados en un contexto de procesamiento en tiempo real además de funcionar mejor para sistemas de tipo distribuido como es en este caso, además se tiene que en comparación con el flujo de datos que se utiliza en empresas de alto nivel, en este la cantidad de usuarios es insignificante por lo cual la velocidad de procesamiento es mucho mayor al tener una latencia despreciable. Principalmente, esta mejora viene dada por el uso de brokers, del sistema publisher-suscriber y de la existencia de particiones. Estas caracteristicas entregan sistemas de balanceo de carga o de aumento de banda como es el caso de las particiones, ya que al crear redundancia se aumenta la velocidad de acceso al dato si estos se encuentran en distintos brokers. 
+```bash
+docker-compose ps
+```
 
-### ¿Que haría usted para manejar una gran cantidad de usuarios al mismo tiempo?
-Se puede afrontar este problema de distintas formas. La primera y la más natural es aumentar el número de brokers, de manera que estos puedan repartirse la carga entrante y distribuirla. Otra forma sería crear particiones pares de forma de crear redundancia y además acelerar el acceso a los datos creando dos puntos de procesamiento. Una tercera forma es crear una especie de escalamiento horizontal y vertical, aumentando el número de brokers y a su vez estos distribuyendolos en distintos hardwares, creando una red interconectada que se auto distribuye.
+## Interacción con el Sistema
+
+Acceder a las APIs a través de las siguientes URLS:
+
+- **Usuarios Bloqueados**: `localhost:5000/blocked`
+- **Login**: `localhost:3000/login`
+
+## Estrategias de Escalabilidad
+
+Para manejar un alto volumen de usuarios simultáneos, se sugieren las siguientes estrategias:
+
+- **Incrementar el Número de Brokers**: Distribuir la carga entre más brokers para mejorar la capacidad de procesamiento y reducir la latencia.
+- **Crear Particiones**: Aumentar la redundancia y la velocidad de acceso a los datos mediante la creación de particiones en diferentes brokers.
+- **Escalado Horizontal y Vertical**: Combinar el aumento de brokers con su distribución en distintos hardware para crear una red robusta y bien distribuida.
+
+## Sugerencias de Mejoras para Mayor Robustez y Complejidad
+
+- **Implementación de Microservicios**: Descomponer las APIs en microservicios más pequeños para mejorar la escalabilidad y mantenimiento.
+- **Autenticación y Autorización Mejoradas**: Implementar OAuth2 y JWT para una gestión segura de la autenticación.
+- **Tolerancia a Fallos**: Utilizar patrones como Circuit Breaker para manejar fallos y evitar la propagación de errores.
+- **Recuperación de Desastres**: Establecer estrategias de respaldo y recuperación para datos críticos.
+- **Optimización del Uso de Kafka**: Ajustar la configuración de particiones y réplicas para mejorar la distribución de carga.
+- **Auto-escalado**: Utilizar orquestadores como Kubernetes para el escalado automático de contenedores.
+- **Dashboard de Administración**: Desarrollar interfaces para que los administradores gestionen el sistema de manera eficiente.
+- **Pruebas de Carga y Estrés**: Realizar pruebas regulares para garantizar la capacidad del sistema bajo carga alta.
+
+## Contribuciones
+
+Se invita a contribuir al proyecto con mejoras, optimizaciones o correcciones de errores.
