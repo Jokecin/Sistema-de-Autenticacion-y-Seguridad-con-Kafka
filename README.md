@@ -21,7 +21,7 @@ Este proyecto implementa un sistema distribuido de autenticación y seguridad ut
 Clonar el repositorio y navegar a la carpeta del proyecto:
 
 ```bash
-git clone https://github.com/link-to-repository
+git clone https://github.com/Jokecin/Sistema-de-Autenticacion-y-Seguridad-con-Kafka
 cd Tarea2SD-main/Tarea 2
 ```
 
